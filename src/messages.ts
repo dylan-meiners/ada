@@ -29,30 +29,6 @@ interface TimeDependentString {
   value: string;
 }
 
-interface Aircraft {
-  transmissionType: TimeDependentString;
-  sessionID: TimeDependentString;
-  aircraftID: TimeDependentString;
-  hexIdent: TimeDependentString;
-  flightID: TimeDependentString;
-  dateMessageGenerated: TimeDependentString;
-  timeMessageGenerated: TimeDependentString;
-  dateMessageLogged: TimeDependentString;
-  timeMessageLogged: TimeDependentString;
-  callsign: TimeDependentString;
-  altitude: TimeDependentString;
-  groundSpeed: TimeDependentString;
-  track: TimeDependentString;
-  latitude: TimeDependentString;
-  longitude: TimeDependentString;
-  verticalRate: TimeDependentString;
-  squawk: TimeDependentString;
-  alertSquawkChange: TimeDependentString;
-  emergency: TimeDependentString;
-  spiIdent: TimeDependentString;
-  isOnGround: TimeDependentString;
-}
-
 export async function handleMessage(str: string) {
   let split = str.split(",");
 
