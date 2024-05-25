@@ -1,4 +1,10 @@
 import { get, set } from "./db";
+import { appendFileSync, existsSync, mkdirSync } from "fs";
+
+const nowStr = new Date().toISOString();
+if (!existsSync("logs")) {
+  mkdirSync("logs");
+}
 
 interface Message {
   transmissionType: string;
@@ -30,6 +36,13 @@ interface TimeDependentString {
 }
 
 export async function handleMessage(str: string) {
+  if (!str) {
+    console.log(`Received invalid string: ${str}`);
+    return;
+  }
+
+  appendFileSync(`logs/${nowStr}.txt`, str + "\n");
+
   let split = str.split(",");
 
   let messageType = split[0];
@@ -89,5 +102,7 @@ export async function handleMessage(str: string) {
     return;
   }
 
-  await set(message.hexIdent, aircraftData).catch(() => {});
+  return set(message.hexIdent, aircraftData).catch((error) => {
+    console.log(error);
+  });
 }
